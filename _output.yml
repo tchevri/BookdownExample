@@ -1,0 +1,33 @@
+bookdown::pdf_book:
+  base_format: "function(..., number_sections) rmarkdown::beamer_presentation(...)"
+  number_sections: false
+  toc: no
+  pandoc_args: [
+      # "--output", "statistics_slides.pdf",
+      "-M", "classoption=noamsthm,11pt,a4paper,blue,xcolor=table",
+#      "-M", "classoption=noamsthm,11pt,a4paper,blue,handout,xcolor=table"
+    ]
+  includes:
+    in_header: beamer-header.tex
+    before_body: beamer_prefix.tex
+    after_body: beamer_suffix.tex
+  latex_engine: xelatex
+  slide_level: 1
+  keep_tex: yes
+#  citation_package: natbib
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">A Minimal Book Example</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    download: ["pdf", "epub"]
+bookdown::pdf_document2:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default

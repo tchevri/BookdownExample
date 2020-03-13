@@ -1,0 +1,129 @@
+%%%%%%%%%%%%%% Beamer-header.tex %%%%%%%%%%%%%%%%%%%%
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}  %% https://tex.stackexchange.com/questions/194426/split-itemize-into-multiple-columns
+\setlength{\columnsep}{1cm}
+\usepackage{makecell}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+%%% BELOW ALLOWS NICE COMPACT FORMAT BUT KILLS ALL HYPERLINKS!!
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[a4paper] %%% ALLOWS NICE COMPACT FORMAT BUT KILLS ALL HYPERLINKS!!
+\mode<handout>{
+\usepackage{pgfpages}
+\pgfpagesuselayout{4 on 1}[a4paper,landscape] %%% ALLOWS NICE COMPACT FORMAT BUT KILLS ALL HYPERLINKS!!
+}
+% \usepackage{xcolor}  %% Commented out
+% see https://tex.stackexchange.com/questions/83101/option-clash-for-package-xcolor
+%\usepackage{etex}  % http://tex.stackexchange.com/questions/38607/no-room-for-a-new-dimen
+\usepackage{adjustbox} % http://tex.stackexchange.com/questions/77998/fitting-tables-into-beamer
+\usepackage{etoolbox}  %% Used for slide number section reset
+\usepackage{graphicx, fancyvrb}
+\usepackage{dsfont}
+%\usepackage{tikz}
+%\usetikzlibrary{arrows,shapes,backgrounds,fit,positioning,calc}
+%\usepackage{tikzit}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Slide number section reset
+% see https://tex.stackexchange.com/questions/278873/how-to-reset-frame-number-in-beamer-correctly-when-using-parts
+%------------------------------------------------------------------------------
+\makeatletter
+\newcount\beamer@sectionstartframe
+\beamer@sectionstartframe=1
+\apptocmd{\beamer@section}{\addtocontents{nav}{\protect\headcommand{%
+    \protect\beamer@sectionframes{\the\beamer@sectionstartframe}{\the\c@framenumber}}}}{}{}
+\apptocmd{\beamer@section}{\beamer@sectionstartframe=\c@framenumber\advance\beamer@sectionstartframe by1\relax}{}{}
+\AtEndDocument{\immediate\write\@auxout{\string\@writefile{nav}%
+    {\noexpand\headcommand{\noexpand\beamer@sectionframes{\the\beamer@sectionstartframe}{\the\c@framenumber}}}}}{}{}
+\def\beamer@startframeofsection{1}
+\def\beamer@endframeofsection{1}
+\def\beamer@sectionframes#1#2{%
+    \ifnum\c@framenumber<#1%
+    \else%
+    \ifnum\c@framenumber>#2%
+    \else%
+    \gdef\beamer@startframeofsection{#1}%
+    \gdef\beamer@endframeofsection{#2}%
+    \fi%
+    \fi%
+}
+\newcommand\insertsectionstartframe{\beamer@startframeofsection}
+\newcommand\insertsectionendframe{\beamer@endframeofsection}
+\makeatother
+
+\def\inserttotalsectionframenumber{%
+    \pgfmathparse{(\insertsectionendframe-\insertsectionstartframe+1)}%
+    \pgfmathprintnumber[fixed,precision=2]{\pgfmathresult}%
+}
+
+\def\insertsectionframenumber{%
+    \pgfmathparse{(\insertframenumber-\insertsectionstartframe+1)}%
+    \pgfmathprintnumber[fixed,precision=2]{\pgfmathresult}%
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theme
+%------
+\usetheme{boxes} % https://tex.stackexchange.com/questions/234658/malmoe-section-in-footer
+\usecolortheme{whale} % Used in Malmoe
+\setbeamercolor*{titlelike}{parent=structure} % Used in Malmoe
+% add page numbers for malmoe 
+\addfootbox{title in head/foot}{\hfill\insertshortauthor\tiny\quad}
+\addfootbox{author in head/foot}{%
+    \tiny\quad\insertshorttitle%
+    \hfill%
+    \usebeamercolor[fg]{page number in head/foot}{%
+        \insertsectionframenumber\,/\,\inserttotalsectionframenumber%
+    }\tiny\quad}
+\setbeamercolor{page number in head/foot}{fg=white}
+% Get rid of headline / navigation symbols
+%-----------------------------------------
+\setbeamertemplate{headline}{}
+%\setbeamercolor{frametitle}{bg=white}
+%\setbeamertemplate{navigation symbols}{}  % This one removes navigation..
+% Sections and subsections should not get their own damn slide
+%-------------------------------------------------------------
+\AtBeginSection{}
+\AtBeginSubsection{}
+%\AtBeginSubsubsection{}
+% Reduce some of R Markdown’s odd vertical spacing
+%-------------------------------------------------
+\setlength{\emergencystretch}{0em}
+\setlength{\parskip}{0pt}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+%  Reset some default colors for itemize/enumerate/description environments
+%--------------------------------------------------------------------------
+\definecolor{darkred}{rgb}{0.7,0,0}
+\definecolor{darkblue}{rgb}{0,0,0.8}
+%  Used to reset basic black for itemize/enumerates within certain environments
+%------------------------------------------------------------------------------
+\setbeamercolor{description item}{fg=darkred!80!black}  %  Color of key word in desciption
+\setbeamercolor{item}{fg=green}  %  The dot color
+\setbeamercolor{itemize/enumerate body}{fg=black}    % Text Level 1
+\setbeamercolor{itemize/enumerate subbody}{fg=darkblue}    % Text Level 2
+\setbeamercolor{itemize/enumerate subsubbody}{fg=green!25!black}    % Text Level 3
+
+\def\beghand{\mode<handout>}
+\def\begpres{\mode<presentation>}
+\def\begtab{\begin{tabular}}
+\def\endtab{\end{tabular}}
+\def\begenum{\begin{enumerate}}
+\def\endenum{\end{enumerate}}
+\def\begcols{\begin{columns}}
+\def\begcol{\begin{column}}
+\def\endcol{\end{column}}
+\def\endcols{\end{columns}}
+\def\begonlyhandout{\begin{onlyenv}<handout:0>}
+\def\endonlyhandout{\end{onlyenv}}
+
+\institute{My institution}
+\newcommand{\CourseName}{My course}
+\newcommand{\Yr}{, 2020}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
