@@ -23,6 +23,8 @@ out_type <- knitr::opts_knit$get("rmarkdown.pandoc.to")
 
 # Prerequisites
 
+`r if (out_type=="beamer") "## Bookdown Markdown"` 
+
 `r if (out_type=="beamer") "-"` This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
 
 `r if (out_type=="beamer") "-"` The **bookdown** package can be installed from CRAN or Github:

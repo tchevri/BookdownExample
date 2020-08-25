@@ -1,3 +1,5 @@
 # Literature
 
+`r if (out_type=="beamer") "## Lit Review"` 
+
 Here is a review of existing methods.

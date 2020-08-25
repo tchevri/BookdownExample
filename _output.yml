@@ -12,7 +12,7 @@ bookdown::pdf_book:
     before_body: beamer_prefix.tex
     after_body: beamer_suffix.tex
   latex_engine: xelatex
-  slide_level: 1
+  slide_level: 2
   keep_tex: yes
 #  citation_package: natbib
 bookdown::gitbook:

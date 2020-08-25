@@ -1,13 +1,18 @@
 # Introduction {#intro}
 
-```{=beamer}
-\mode<presentation>
-{ 
-  \title[Lecture 1]{New Course \newline \, Lecture 1}
-  \date{1 September 2020}
-}
-# \titlepage
+```{r, eval = (out_type=="beamer"), echo=FALSE, results='asis'}
+cat(
+        "\n\n\\mode<presentation> \n",
+        "{ \n",
+        "\\title[Lecture 1]{\\CourseName{} \\newline \\, Lecture 1}\n",
+        "\\date{1 September\\Yr{}}\n",
+        "}\n\n",
+        "##\n\n",
+        "\\titlepage\n\n",
+        sep = "")
 ```
+
+`r if (out_type=="beamer") "## Figure"` 
 
 ```{r, eval=(out_type!="beamer"), echo=FALSE, results='asis'}
 cat("You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \\@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \\@ref(methods).  ")  
@@ -24,7 +29,7 @@ plot(pressure, type = 'b', pch = 19)
 cat("Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \\@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \\@ref(tab:nice-tab).")
 ```
 
-`r if (out_type=="beamer") "# Table  "`  
+`r if (out_type=="beamer") "## Table  "`  
 
 ```{r nice-tab, tidy=FALSE}
 knitr::kable(
