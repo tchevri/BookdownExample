@@ -1,16 +1,14 @@
 # Introduction {#intro}
 
-```{r, eval = (out_type=="beamer"), echo=FALSE, results='asis'}
-cat(
-        "\n\n\\mode<presentation> \n",
-        "{ \n",
-        "\\title[Lecture 1]{\\CourseName{} \\newline \\, Lecture 1}\n",
-        "\\date{1 September\\Yr{}}\n",
-        "}\n\n",
-        "##\n\n",
-        "\\titlepage\n\n",
-        sep = "")
+```{=beamer}
+\mode<presentation>
+{ 
+  \title[Lecture 1]{\CourseName{} \newline \, Lecture 1}
+  \date{1 September \Yr{}}
+}
 ```
+
+`r if (out_type=="beamer") "## \n\\titlepage"`  
 
 `r if (out_type=="beamer") "## Figure"` 
 
