@@ -1,5 +1,14 @@
 # Introduction {#intro}
 
+```{=beamer}
+\mode<presentation>
+{ 
+  \title[Lecture 1]{New Course \newline \, Lecture 1}
+  \date{1 September 2020}
+}
+# \titlepage
+```
+
 ```{r, eval=(out_type!="beamer"), echo=FALSE, results='asis'}
 cat("You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \\@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \\@ref(methods).  ")  
 
